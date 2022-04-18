@@ -1,0 +1,41 @@
+name: heartbleed-topology
+
+hosts:    
+  - name: attacker
+    base_box:
+      image: munikypo/kali-2020.4
+    flavor: csirtmu.tiny1x4
+    extra:
+      memory: 1024
+
+  - name: user
+    base_box:
+      image: munikypo/kali-2020.4
+    flavor: csirtmu.tiny1x4
+    extra:
+      memory: 1024
+
+routers:
+  - name: router
+    base_box:
+      image: munikypo/debian-10
+    flavor: csirtmu.tiny1x2
+
+networks:
+  - name: network
+    cidr: 10.10.20.0/24
+
+net_mappings:   
+  - host: attacker
+    network: network
+    ip: 10.10.20.2
+  - host: user
+    network: network
+    ip: 10.10.20.4
+
+router_mappings:
+  - router: router
+    network: network
+    ip: 10.10.20.1
+
+groups: []

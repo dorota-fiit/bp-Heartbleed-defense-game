@@ -1,0 +1,101 @@
+#Attacker
+
+- name: Copy attacker files
+  hosts: attacker
+  become: yes
+  tasks:
+    - name: Copy attack code
+      copy:
+        src: attacker_files/attack.py
+        dest: /home/kali/
+        owner: root
+        mode: 0755
+
+    - name: Copy attack_loop script
+      copy:
+        src: attacker_files/attack_loop.sh
+        dest: /home/kali/
+        owner: root
+        mode: 0755 
+
+- name: Prepare attack
+  hosts: attacker
+  become: yes
+  tasks:
+    - name: Add servers IP address
+      shell: sed -i '1s/^/10.10.20.3 www.heartbleedlabelgg.com\n/' /etc/hosts
+
+- name: Launch attack
+  hosts: attacker
+  become: yes
+  tasks:
+    - name: Run script
+      shell: bash /home/kali/attack_loop.sh
+      async: 1800
+      poll: 0 
+      register: scrout
+
+#User
+
+- name: Copy users files
+  hosts: user
+  become: yes
+  tasks:
+    - name: Copy browser
+      copy:
+        src: user_files/firefox-98.0.2.tar.bz2
+        dest: /home/kali/
+        owner: root
+        mode: 0755
+    - name: Copy driver
+      copy:
+        src: user_files/geckodriver-v0.30.0-linux64.tar.gz
+        dest: /home/kali/
+        owner: root
+        mode: 0755
+    - name: Copy firefox installation script
+      copy:
+        src: user_files/install_firefox.sh
+        dest: /home/kali/
+        owner: root
+        mode: 0755
+    - name: Copy interaction automatization code
+      copy:
+        src: user_files/interaction.py
+        dest: /home/kali/
+        owner: root
+        mode: 0755
+    - name: Copy interaction script
+      copy:
+        src: user_files/start_interaction.sh
+        dest: /home/kali/
+        owner: root
+        mode: 0755
+        
+- name: Edit usesrs hosts file
+  hosts: user
+  become: yes
+  tasks:
+    - name: Add servers IP address
+      shell: sed -i '1s/^/10.10.20.3 www.heartbleedlabelgg.com\n/' /etc/hosts
+
+- name: Start installation
+  hosts: user
+  become: yes
+  tasks:
+    - name: Run installation script
+      shell: bash /home/kali/install_firefox.sh
+
+- name: Start interaction
+  hosts: user
+  become: yes
+  tasks:
+    - name: Run interaction script
+      shell: bash /home/kali/start_interaction.sh
+      async: 1000
+      poll: 0 
+      register: scrout
+
+ 
+
+ 
