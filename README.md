@@ -22,6 +22,15 @@ Po nainštalovaní prostredia si stiahnite repozitár do Vášho počítača. Ob
 5. Po inštalácii vytvorte symbolickú linku z novo nainštalovanej verzie zadaním príkazu `sudo ln -s /usr/local/ssl/bin/openssl /usr/bin/openssl` a nakoniec aktualizujte linky príkazom `sudo ldconfig`.
 6. Úspešnú inštaláciu môžte otestovať príkazom `openssl version`. 
 7. Otvorte nástroj Wireshark a zapnite zachytávanie premávky pre IP adresu 10.10.20.3. Zachytávanie premávky bude pre Vás užitočné pri identifikácii prebiehajúcich útokov.
+8. Vo Wireshark identifikujte útoky a zistite IP adresu útočníka - 10.10.20.2. 
+9. Firewall je možné nastaviť viacerými spôsobmi, odporúčam využitie `ufw`:\
+  9.1 `sudo ufw deny from 10.10.20.2 to any`\
+  9.2 `sudo ufw allow ssh`\
+  9.3 `sudo ufw default allow outgoing`\
+  9.4 `sudo ufw default deny incoming `\
+  9.5 `sudo ufw enable `\
+  9.6 `sudo ufw allow https `\
+  9.7 `sudo ufw allow http`
 
 ## Zdroje
 https://web.ecs.syr.edu/~wedu/seed/Labs_12.04/Networking/Heartbleed/
