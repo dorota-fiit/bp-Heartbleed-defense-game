@@ -15,14 +15,13 @@ Po nainštalovaní prostredia si stiahnite repozitár do Vášho počítača. Ob
 1. Otvorte terminál a zadajte príkaz `sudo apt-get purge openssl`, ktorý odstráni predošlú verziu. Binárny súbor **openssl** môže byť nutné odstrániť aj dodatočne príkazom `sudo rm /usr/bin/openssl`.
 2. Následne odstráňte balíky stiahnuté ako závislosti príkazmi `sudo apt-get autoremove` a `sudo apt-get autoclean`.
 3. Rozbaľte novú verziu OpenSSL príkazom `tar -zxf /home/seed/openssl-1.0.1g.tar.gz --directory /home/seed/` a prejdite do priečinka príkazom `cd /home/seed/openssl-1.0.1g/`.
-4. Pri inštalácii postupujeme na základe postupu umiestneného v súbore **/home/seed/openssl-1.0.1g/INSTALL**:\
+4. Pri inštalácii postupujte na základe postupu umiestneného v súbore **/home/seed/openssl-1.0.1g/INSTALL**:\
   4.1 `./config`\
   4.2 `make`\
   4.4 `sudo make install`
-5. Po inštalácii vytvoríme symbolickú linku z novo nainštalovanej verzie zadaním príkazu `sudo ln -s /usr/local/ssl/bin/openssl /usr/bin/openssl` a nakoniec aktualizujeme linky príkazom `sudo ldconfig`.
-6. Úspešnú inštaláciu môžeme otestovať príkazom `openssl version`. 
-
-Otvorte nástroj Wireshark a zapnite zachytávanie premávky pre IP adresu 10.10.20.3. Zachytávanie premávky bude pre Vás užitočné pri identifikácii prebiehajúcich útokov.
+5. Po inštalácii vytvorte symbolickú linku z novo nainštalovanej verzie zadaním príkazu `sudo ln -s /usr/local/ssl/bin/openssl /usr/bin/openssl` a nakoniec aktualizujte linky príkazom `sudo ldconfig`.
+6. Úspešnú inštaláciu môžte otestovať príkazom `openssl version`. 
+7. Otvorte nástroj Wireshark a zapnite zachytávanie premávky pre IP adresu 10.10.20.3. Zachytávanie premávky bude pre Vás užitočné pri identifikácii prebiehajúcich útokov.
 
 ## Zdroje
 https://web.ecs.syr.edu/~wedu/seed/Labs_12.04/Networking/Heartbleed/
