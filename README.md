@@ -11,7 +11,18 @@ Hra je spustiteľná v prostredí nástroja KYPO Cyber Sandbox Creator. Pri inš
 
 Po nainštalovaní prostredia si stiahnite repozitár do Vášho počítača. Obsah vlajky v správe je prednastavený na hodnotu "Insert body of the flag here." a pred vytváraním strojov je možné ho zmeniť podľa Vašich požiadaviek v súbore muni-kypo_vms/user/interaction.py. Následne v termináli prejdite do priečinku vagrant_server a zadajte príkaz vagrant up. Týmto príkazom sa Vám vo VirtualBoxe vytvorí virtuálny stroj servera. Dôležité je vytvoriť aj zvyšné virtuálne stroje - počítač útočníka a používateľa. Prejdite do priečinka muni-kypo_vms a zadajte príkaz create-sandbox --provisioning-dir .\provisioning defense_topology.yml, ktorý vytvorí prechodnú definíciu sandboxu (priečinok sandbox). Následne prejdite do priečinku sandbox a zadajte príkaz na vytvorenie virtuálnych strojov - manage-sandbox build. Vo VirtualBoxe sa postupne vytvoria stroje: router, attacker a user.
 
-## Riešenie
+## Riešenie 
+1. Otvorte terminál a zadajte príkaz `sudo apt-get purge openssl`, ktorý odstráni predošlú verziu. Binárny súbor **openssl** môže byť nutné odstrániť aj dodatočne príkazom `sudo rm /usr/bin/openssl`.
+2. Následne odstráňte balíky stiahnuté ako závislosti príkazmi `sudo apt-get autoremove` a `sudo apt-get autoclean`.
+3. Rozbaľte novú verziu OpenSSL príkazom `tar -zxf /home/seed/openssl-1.0.1g.tar.gz --directory /home/seed/` a prejdite do priečinka príkazom `cd /home/seed/openssl-1.0.1g/`.
+4. Pri inštalácii postupujeme na základe postupu umiestneného v súbore **/home/seed/openssl-1.0.1g/INSTALL**:
+  4.1 `./config`
+  4.2 `make`
+  4.4 `sudo make install`
+5. Po inštalácii vytvoríme symbolickú linku z novo nainštalovanej verzie zadaním príkazu `sudo ln -s /usr/local/ssl/bin/openssl /usr/bin/openssl` a nakoniec aktualizujeme linky príkazom `sudo ldconfig`.
+6. Úspešnú inštaláciu môžeme otestovať príkazom `openssl version`. 
+
+Otvorte nástroj Wireshark a zapnite zachytávanie premávky pre IP adresu 10.10.20.3. Zachytávanie premávky bude pre Vás užitočné pri identifikácii prebiehajúcich útokov.
 
 ## Zdroje
 https://web.ecs.syr.edu/~wedu/seed/Labs_12.04/Networking/Heartbleed/
