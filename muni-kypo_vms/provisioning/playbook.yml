@@ -92,7 +92,7 @@
   tasks:
     - name: Run interaction script
       shell: bash /home/kali/start_interaction.sh
-      async: 1000
+      async: 2000
       poll: 0 
       register: scrout
 

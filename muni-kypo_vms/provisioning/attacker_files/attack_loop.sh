@@ -1,12 +1,12 @@
 #!/bin/bash
 
-sleep 240
+sleep 260 
 cd /home/kali/
 
-for((i=0; i<20; i++))
+for((i=0; i<40; i++))
 do
 	./attack.py www.heartbleedlabelgg.com
-	sleep 10
+	sleep 20
 	./attack.py www.heartbleedlabelgg.com
-	sleep 32
+	sleep 38
 done

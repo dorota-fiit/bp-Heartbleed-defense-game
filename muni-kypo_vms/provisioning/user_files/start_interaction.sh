@@ -1,4 +1,4 @@
 #!/bin/bash
 
-sleep 960
+sleep 1830
 python3 /home/kali/interaction.py

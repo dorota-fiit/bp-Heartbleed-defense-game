@@ -34,7 +34,7 @@ driver.find_element_by_xpath('/html/body/div/div[4]/div/div/div/div[3]/div/div[1
 #send message
 driver.find_element_by_xpath('/html/body/div/div[4]/div/div/div/div[3]/div/div[1]/ul[1]/li[3]/a').click()
 driver.find_element_by_xpath('/html/body/div/div[4]/div/div/div[2]/form/fieldset/div[2]/input').send_keys('FLAG')
-driver.find_element_by_xpath('/html/body/div/div[4]/div/div/div[2]/form/fieldset/div[3]/textarea').send_keys('Insert body of the flag here.')
+driver.find_element_by_xpath('/html/body/div/div[4]/div/div/div[2]/form/fieldset/div[3]/textarea').send_keys('Insert body of the message here.')
 driver.find_element_by_xpath('/html/body/div/div[4]/div/div/div[2]/form/fieldset/div[4]/input').click()
 
 driver.quit()
