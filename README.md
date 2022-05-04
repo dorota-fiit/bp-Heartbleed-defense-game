@@ -15,47 +15,55 @@ Po nainštalovaní prostredia si stiahnite repozitár do Vášho počítača. N�
 
 ## Riešenie 
 1. Prihláste sa do zraniteľného servera pod menom "seed" s heslom "dees". 
-1. Otvorte terminál a zadajte príkaz, ktorý odstráni predošlú verziu.  Dodatočne odstráňte aj binárny súbor **openssl** v priečinku **/usr/bin/**.
-  <details>
-    <summary>Nápoveda</summary>
-    `sudo apt-get purge openssl`\
-    `sudo rm /usr/bin/openssl`
-  </details>
-2. Odstráňte balíky stiahnuté ako závislosti.
+2. Otvorte terminál a zadajte príkaz, ktorý odstráni predošlú verziu.  Dodatočne odstráňte aj binárny súbor **openssl** v priečinku **/usr/bin/**.
+  
+    <details>
+      <summary>Nápoveda</summary>
+      `sudo apt-get purge openssl`\
+      `sudo rm /usr/bin/openssl`
+    </details>
+
+3. Odstráňte balíky stiahnuté ako závislosti.\
   `sudo apt-get autoremove`\
   `sudo apt-get autoclean`
-3. Rozbaľte novú verziu OpenSSL. 
-  `tar -zxf /home/seed/openssl-1.0.1g.tar.gz --directory /home/seed/` 
-4. Prejdite do priečinka **/home/seed/openssl-1.0.1g/**.
-  `cd /home/seed/openssl-1.0.1g/`.
-4. Nainštalujte novú verziu OpenSSL. Pri inštalácii postupujte na základe postupu umiestneného v súbore **/home/seed/openssl-1.0.1g/INSTALL**.
-  <details>
-    <summary>Nápoveda</summary>
-    `./config`\
-    `make`\
-    `sudo make install`
-  </details>
-5. Po inštalácii vytvorte symbolickú linku z novo nainštalovanej verzie a aktualizujte linky.
-  `sudo ln -s /usr/local/ssl/bin/openssl /usr/bin/openssl`
+4. Rozbaľte novú verziu OpenSSL.\
+  `tar -zxf /home/seed/openssl-1.0.1g.tar.gz --directory /home/seed/`
+5. Prejdite do priečinka **/home/seed/openssl-1.0.1g/**.\
+  `cd /home/seed/openssl-1.0.1g/`
+5. Nainštalujte novú verziu OpenSSL. Pri inštalácii postupujte na základe postupu umiestneného v súbore **/home/seed/openssl-1.0.1g/INSTALL**.
+  
+    <details>
+      <summary>Nápoveda</summary>
+      `./config`\
+      `make`\
+      `sudo make install`
+    </details>
+
+6. Po inštalácii vytvorte symbolickú linku z novo nainštalovanej verzie a aktualizujte linky.\
+  `sudo ln -s /usr/local/ssl/bin/openssl /usr/bin/openssl`\
   `sudo ldconfig`
-6. Úspešnú inštaláciu môžte otestovať.
-  `openssl version` 
-7. Pozrite si stroje v sieti a zistite IP adresu útočníka vylúčením známych adries.
+7. Úspešnú inštaláciu môžte otestovať.\
+  `openssl version`
+8. Pozrite si stroje v sieti a zistite IP adresu útočníka vylúčením známych adries.\
   `sudo nmap -sn 10.10.20.3/24` 
-  <details>
-    <summary>Nápoveda</summary>
-    IP adresa útočníka: 10.10.20.2
-  </details>
+   
+    <details>
+      <summary>Nápoveda</summary>
+      IP adresa útočníka: 10.10.20.2
+    </details>
+    
 9. Nastavte firewall tak aby bola IP adresa útočníka zablokovaná. Firewall je možné nastaviť viacerými spôsobmi ako napríklad iptables, odporúčam však využitie `ufw`. Pri využití `ufw` nezabudnite povoliť služby ako ssh, https a http.
-  <details>
-    <summary>Nápoveda</summary>
-    `sudo ufw deny from 10.10.20.2 to any`\
-    `sudo ufw allow ssh`\
-    `sudo ufw default allow outgoing`\
-    `sudo ufw default deny incoming `\
-    `sudo ufw enable `\
-    `sudo ufw allow https `\
-    `sudo ufw allow http`
-  </details>
+  
+    <details>
+      <summary>Nápoveda</summary>
+      `sudo ufw deny from 10.10.20.2 to any`\
+      `sudo ufw allow ssh`\
+      `sudo ufw default allow outgoing`\
+      `sudo ufw default deny incoming `\
+      `sudo ufw enable `\
+      `sudo ufw allow https `\
+      `sudo ufw allow http`
+    </details>
+
 ## Zdroje
 https://web.ecs.syr.edu/~wedu/seed/Labs_12.04/Networking/Heartbleed/
