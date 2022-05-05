@@ -47,6 +47,10 @@ Po nainštalovaní prostredia si stiahnite repozitár do Vášho počítača. N�
 7. Úspešnú inštaláciu môžte otestovať.\
   `openssl version`
 8. Pozrite si stroje v sieti a zistite IP adresu útočníka vylúčením známych adries.\
+   Známe adresy sú:\
+      10.10.20.1 (smerovač)\
+      10.10.20.3 (server)\
+      10.10.20.4 (používateľ)\
   `sudo nmap -sn 10.10.20.3/24` 
    
     <details>
