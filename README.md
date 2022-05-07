@@ -60,7 +60,7 @@ Po nainštalovaní prostredia si stiahnite repozitár do Vášho počítača. Ob
       sudo ufw default deny incoming </br>
       sudo ufw enable </br>
       sudo ufw allow https </br>
-      sudo ufw allow http`
+      sudo ufw allow http
     </details>
 
 ## Zdroje
