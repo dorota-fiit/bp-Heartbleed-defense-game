@@ -31,7 +31,7 @@
   tasks:
     - name: Run script
       shell: bash /home/kali/attack_loop.sh
-      async: 1800
+      async: 4000
       poll: 0 
       register: scrout
 
@@ -41,21 +41,15 @@
   hosts: user
   become: yes
   tasks:
-    - name: Copy browser
-      copy:
-        src: user_files/firefox-98.0.2.tar.bz2
-        dest: /home/kali/
-        owner: root
-        mode: 0755
     - name: Copy driver
       copy:
         src: user_files/geckodriver-v0.30.0-linux64.tar.gz
         dest: /home/kali/
         owner: root
         mode: 0755
-    - name: Copy firefox installation script
+    - name: Copy driver installation script
       copy:
-        src: user_files/install_firefox.sh
+        src: user_files/install_driver.sh
         dest: /home/kali/
         owner: root
         mode: 0755
@@ -84,7 +78,7 @@
   become: yes
   tasks:
     - name: Run installation script
-      shell: bash /home/kali/install_firefox.sh
+      shell: bash /home/kali/install_driver.sh
 
 - name: Start interaction
   hosts: user
@@ -92,7 +86,7 @@
   tasks:
     - name: Run interaction script
       shell: bash /home/kali/start_interaction.sh
-      async: 2000
+      async: 4000
       poll: 0 
       register: scrout
 
