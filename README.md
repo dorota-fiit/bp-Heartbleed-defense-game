@@ -1,6 +1,5 @@
 # bp-Heartbleed-defense-game
 Repozitár obsahuje všetky potrebné súbory pre spustenie bezpečnostnej hry typu Capture the Flag (Defend-only) k bakalárskej práci Bezpečnosť protokolu SSL/TLS. Hra demonštruje závažnosť chyby Heartbleed. Virtuálne prostredie bude zahŕňať tri stroje - počítač útočníka, používateľa (IP adresa 10.10.20.4) a server (IP adresa 10.10.20.3). Stroje sú usporiadané podľa topológie v súbore **defense_topology.png** a vybavené operačnými systémemi Kali Linux a Ubuntu. Cieľový stroj disponuje zraniteľnou verziou knižnice OpenSSL (zraniteľné verzie sú od 1.0.1 do 1.0.1f).
-
 ![Topológia hry](https://github.com/dorota-fiit/bp-Heartbleed-defense-game/blob/main/defense_topology.png)
 
 ## Zraniteľnosť Heartbleed 
@@ -47,9 +46,6 @@ Po nainštalovaní prostredia si stiahnite repozitár do Vášho počítača. Ob
 7. Úspešnú inštaláciu môžte otestovať.\
   `openssl version`
 8. Pozrite si stroje v sieti a zistite IP adresu útočníka vylúčením známych adries.\
-   Známe adresy sú:\
-        10.10.20.1 (smerovač)\
-        10.10.20.4 (používateľ)\
   `sudo nmap -sn 10.10.20.3/24` 
    
     <details>
