@@ -19,10 +19,9 @@ Po nainštalovaní prostredia si stiahnite repozitár do Vášho počítača. Ob
 1. Prihláste sa do zraniteľného servera pod menom "seed" s heslom "dees". 
 2. Otvorte terminál a zadajte príkaz, ktorý odstráni predošlú verziu.  Dodatočne odstráňte aj binárny súbor **openssl** v priečinku **/usr/bin/**.
   
-    <details>
-      <summary>Nápoveda</summary>
-      `sudo apt-get purge openssl`\
-      `sudo rm /usr/bin/openssl`
+    <details><summary>Nápoveda</summary>
+      sudo apt-get purge openssl </br>
+      sudo rm /usr/bin/openssl
     </details>
 
 3. Odstráňte balíky stiahnuté ako závislosti.\
@@ -34,11 +33,10 @@ Po nainštalovaní prostredia si stiahnite repozitár do Vášho počítača. Ob
   `cd /home/seed/openssl-1.0.1g/`
 5. Nainštalujte novú verziu OpenSSL. Pri inštalácii postupujte na základe postupu umiestneného v súbore **/home/seed/openssl-1.0.1g/INSTALL**. Potrebné nástroje sú už nainštalované, pokračujte časťou "Quick Start".
   
-    <details>
-      <summary>Nápoveda</summary>
-      `./config`\
-      `make`\
-      `sudo make install`
+    <details><summary>Nápoveda</summary>
+      ./config </br>
+      make </br>
+      sudo make install
     </details>
 
 6. Po inštalácii vytvorte symbolickú linku z novo nainštalovanej verzie a aktualizujte linky.\
@@ -49,22 +47,20 @@ Po nainštalovaní prostredia si stiahnite repozitár do Vášho počítača. Ob
 8. Pozrite si stroje v sieti a zistite IP adresu útočníka vylúčením známych adries.\
   `sudo nmap -sn 10.10.20.3/24` 
    
-    <details>
-      <summary>Nápoveda</summary>
+    <details><summary>Nápoveda</summary>
       IP adresa útočníka: 10.10.20.2
     </details>
     
 9. Nastavte firewall tak aby bola IP adresa útočníka zablokovaná. Firewall je možné nastaviť viacerými spôsobmi ako napríklad iptables, odporúčam však využitie `ufw`. Pri využití `ufw` nezabudnite povoliť služby ako ssh, https a http.
   
-    <details>
-      <summary>Nápoveda</summary>
-      `sudo ufw deny from 10.10.20.2 to any`\
-      `sudo ufw allow ssh`\
-      `sudo ufw default allow outgoing`\
-      `sudo ufw default deny incoming `\
-      `sudo ufw enable `\
-      `sudo ufw allow https `\
-      `sudo ufw allow http`
+    <details><summary>Nápoveda</summary>
+      sudo ufw deny from 10.10.20.2 to any </br>
+      sudo ufw allow ssh </br>
+      sudo ufw default allow outgoing </br>
+      sudo ufw default deny incoming </br>
+      sudo ufw enable </br>
+      sudo ufw allow https </br>
+      sudo ufw allow http`
     </details>
 
 ## Zdroje
