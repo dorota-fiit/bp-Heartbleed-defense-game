@@ -36,7 +36,7 @@ Po nainštalovaní prostredia si stiahnite repozitár do Vášho počítača. Ob
   `tar -zxf /home/seed/openssl-1.0.1g.tar.gz --directory /home/seed/`
 5. Prejdite do priečinka **/home/seed/openssl-1.0.1g/**.\
   `cd /home/seed/openssl-1.0.1g/`
-5. Nainštalujte novú verziu OpenSSL. Pri inštalácii postupujte na základe postupu umiestneného v súbore **/home/seed/openssl-1.0.1g/INSTALL**. Potrebné nástroje sú už nainštalované, pokračujte časťou "Quick Start".
+5. Nainštalujte novú verziu OpenSSL. Pri inštalácii postupujte na základe postupu umiestneného v súbore **/home/seed/openssl-1.0.1g/INSTALL**. Potrebné nástroje sú už nainštalované, pokračujte časťou "Quick Start" obsahujúcou 3 príkazy.
   
     <details><summary>Nápoveda</summary>
   
