@@ -19,5 +19,5 @@ do
 done
 
 #If the machines are build, wait 30 minutes and start interaction.
-sleep 1890
+sleep 1910
 python3 /home/kali/interaction.py
