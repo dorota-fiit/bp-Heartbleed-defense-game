@@ -1,14 +1,18 @@
 # bp-Heartbleed-defense-game
 Repozitár obsahuje všetky potrebné súbory pre spustenie bezpečnostnej hry typu Capture the Flag (Defend-only) k bakalárskej práci Bezpečnosť protokolu SSL/TLS. Hra demonštruje závažnosť chyby Heartbleed. Virtuálne prostredie bude zahŕňať tri stroje - počítač útočníka, používateľa (IP adresa 10.10.20.4) a server (IP adresa 10.10.20.3). Stroje sú usporiadané podľa topológie v súbore **defense_topology.png** a vybavené operačnými systémemi Kali Linux a Ubuntu. Cieľový stroj disponuje zraniteľnou verziou knižnice OpenSSL (zraniteľné verzie sú od 1.0.1 do 1.0.1f).
 
-![Topológia hry](https://github.com/dorota-fiit/bp-Heartbleed-defense-game/blob/main/defense_topology.png)
+<p align="center">
+  <img src="https://github.com/dorota-fiit/bp-Heartbleed-defense-game/blob/main/defense_topology.png" width="420px">
+</p>
 
 ## Zraniteľnosť Heartbleed 
 Heartbleed je implementačná chyba SSL/TLS heartbeat rozšírenia v rámci OpenSSL a umožňuje útočníkovi získavať dáta zo vzdialeného servera, pričom ukradnuté dáta môžu zahŕňať napríklad používateľské mená, heslá alebo platobné údaje. SSL/TLS protokol slúži na vytvorenie bezpečného komunikačného kanálu medzi aplikáciami. Kvôli výpočtovým postupom ako šifrovanie a dešifrovanie verejného kľúča alebo výmena kľúčov je vytvorenie nového kanálu pomerne nákladné. Aj napriek tomu, ak server a klient nekomunikujú, kanál medzi nimi sa po určitom čase preruší a spojenie musí byť pri ďalšej komunikácii opätovne nadviazané. S cieľom minimalizovať náklady bolo implementované riešenie prostredníctvom rozšírenia heartbeat.  Heartbeat poskytuje nový protokol implementujúci keep-alive funkcionalitu protokolu SSL/TLS.
 
 Prvým krokom v rámci tejto funkcionality je odoslanie Heartbeat paketu, nazývaného žiadosť, príjemcovi. Po prijatí prijímateľ skonštruuje paket predstavujúci odpoveď a odošle ho odosielateľovi. Správa HeartbeatResponse by mala niesť obsah zhodný so žiadosťou a svoju vlastnú náhodnú výplň. Zraniteľnosť je spôsobená kódom, ktorý nesprávne validuje vstupy pri kopírovaní dát z privátnej pamäte do odchádzajúceho paketu. Obsah žiadosti sa kopíruje do paketu odpovede, no veľkosť kopírovaného obsahu nie je určená jeho reálnou veľkosťou, ale veľkosťou zadanou odosielateľom. memcpy() teda skopíruje viac dát do paketu odpovedi ako je v pakete žiadosti. Začne kopírovaním obsahu paketu žiadosti, no postupne prekročí hranicu obsahu a začne kopírovať aj dáta uchovávané v pamäti nad ním. Práve táto pamäť môže obsahovať senzitívne používateľské informácie. Získané informácie sa spolu s obsahom prekopírujú do paketu odpovede a sú odoslané v HeartbeatResponse útočníkovi. Útočníkovi to umožňuje čítať dáta uložené v privátnej pamäti, ktoré mohli potenciálne zahŕňať aj dáta prenášané bezpečným kanálom a kryptografické tajomstvá.
 
-![Heartbleed](https://github.com/dorota-fiit/bp-Heartbleed-defense-game/blob/main/heartbleed_attack.PNG)
+<p align="center">
+  <img src="https://github.com/dorota-fiit/bp-Heartbleed-defense-game/blob/main/heartbleed_attack.PNG" width="420px">
+</p>
 
 ## Zadanie
 Keďže ide o hru Defend-only, hráč má za úlohu ochrániť používateľove údaje (vlajku) pred útočníkom. Údaje sú vo forme správy, ktorá bude po 30 minútach odoslaná v rámci automatizovanej interakcie používateľa na zraniteľný server. Hráč - obranca musí zabezpečiť server a nastaviť firewall (napríklad pomocou UFW) tak aby bola IP adresa útočníka zablokovaná. Zabezpečenie servera zahŕňa odstránenie zraniteľnej verzie OpenSSL 1.0.1 a jej závislostí, rozbalenie novej verzie 1.0.1g, jej manuálne nainštalovanie (**home/seed/openssl-1.0.1g/INSTALL**) a vytvorenie symbolickej linky. Obranca bude mať túto verziu k dispozícii v priečinku **/home/seed/**. Hráč bude musieť v sieti identifikovať IP adresu útočníka. Po uplynutí času vyhradeného na vykonanie úloh sa spustí kontrola stavu zabezpečenia. Pri splnení úloh sa hra končí úspešne. Pred nastavením prostredia a inštaláciou si odporúčam prečítať vopred celý návod. Riešenie obsahuje všetky kroky potrebné na vykonanie obranných úloh.
