@@ -87,6 +87,12 @@ Po nainštalovaní prostredia si stiahnite repozitár do Vášho počítača. Ob
       sudo ufw allow ssh
     ```
     ```
+      sudo ufw allow https
+    ```
+    ```
+      sudo ufw allow http
+    ```
+    ```
       sudo ufw default allow outgoing
     ```
     ```
@@ -94,12 +100,6 @@ Po nainštalovaní prostredia si stiahnite repozitár do Vášho počítača. Ob
     ```
     ```
       sudo ufw enable 
-    ```
-    ```
-      sudo ufw allow https
-    ```
-    ```
-      sudo ufw allow http
     ```
     </details>
 
